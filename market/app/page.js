@@ -5,12 +5,7 @@ export default function Home() {
     let link = "https://www.google.com"
     return (
         <div>
-            <nav className="navbar">
-                <Link href="/">홈</Link>
-                <Link href="/list">List</Link>
-                {/* Link : a태그와 같은데 조금 더 부드럽게 전환 */}
-                {/* 이동할 경로 적어줌 */}
-            </nav>
+            {/* navbar 페이지 전체에 두기때문에 layout.js로 빼줌 */}
             <a href={link} style={{ color: "#fff", fontSize: "30px" }}>
                 <h1 className="title">Market</h1>
             </a >
