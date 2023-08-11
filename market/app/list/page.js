@@ -1,26 +1,48 @@
+// export default function List() {
+//     let 상품 = ['Melon', 'Watermelon', 'Pineapple']
+
+//     return (
+//         <div>
+//             <h1 className="title">List</h1>
+//             <div className="food">
+//                 <h4>{상품[0]} $40</h4>
+//             </div>
+//             <div className="food">
+//                 <h4>{상품[1]} $40</h4>
+//             </div>
+//             <div className="food">
+//                 <h4>{상품[2]} $40</h4>
+//             </div>
+//         </div>
+//     )
+// }
+
+//------------------------------------------------------------//
+
+// jsx에서는 for반복문, if문 쓸 수 없음
+// map()사용
+// map((a,i)=>{return 10})
+// 첫번째파라미터 a : array 안의 자료 출력
+// 두번째파라미터 i : 반복될 때마다 0부터 1씩 커지는 정수
+// return에 적은 것을 array로 담아줌 : 위에서는 3번 반복되기 때문에 10이 3번 출력[10,10,10]
+
+//------------------------------------------------------------//
+
 export default function List() {
+    let 상품 = ['Melon', 'Watermelon', 'Pineapple']
+
     return (
         <div>
             <h1 className="title">List</h1>
-            <div className="food">
-                <h4>Melon $40</h4>
-            </div>
-            <div className="food">
-                <h4>Watermelon $40</h4>
-            </div>
+            {
+                상품.map((a) => {
+                    return (
+                        <div className="food">
+                            <h4>{a} $40</h4>
+                        </div>
+                    )
+                })
+            }
         </div>
     )
 }
-// Next.js에서는 URL과 페이지 만들고 싶으면
-// 1. app폴더안에 폴더만들고
-// 2. 그 안에 page.js 넣고
-// 3. 그 안에 레이아웃 넣기
-// 4. 그러면 폴더명으로 URL 자동생성됨
-// + list/melon 하고싶으면 app/list/melon 폴더생성
-
-// page.js 만드는법
-// - component를 넣으면 됨
-// 1. function작명(){}
-// 2. return(JSX~)
-// 3. export default
-// > 사실 그냥 rfc 엔터치면 기본셋팅됨
