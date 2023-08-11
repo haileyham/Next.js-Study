@@ -26,6 +26,8 @@ export default function RootLayout({ children }) {
                     2. 상위폴더에 layout.js 있으면 그걸로 1번을 감쌈 //그렇기때문에 현재 list폴더안에 page.js있고, layout.js없지만 상위폴더에서 감싸고 있음 //
                     즉 page.js 보여줄 때는 옆에, 상위에 있는 모든 layout.js 합쳐서 보여줌 //
                     결론은 페이지변경과 상관없이 계속 보여줄 UI는 layout.js 쓰는게 편할수도 */}
+                    <Link href="/cart">Cart</Link>
+
                 </nav>
                 {children}
                 {/* 이 children이 page.js가 들어가는 부분임 */}
