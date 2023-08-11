@@ -1,83 +1,72 @@
-//------------------------------------------------------------//
+// import 가져와보깅 from './data.js'
 
 // export default function Cart() {
+//     let 장바구니 = ['melon', 'watermelon']
 //     return (
 //         <div>
-//             <h4 className="title">Cart</h4>
-//             <div className="cart-item">
-//                 <p>상품명</p>
-//                 <p>$40</p>
-//                 <p>1개</p>
-//             </div>
-//             <div className="cart-item">
-//                 <p>상품명</p>
-//                 <p>$40</p>
-//                 <p>1개</p>
-//             </div>
+//             <CartItem 작명="전할데이터" />
+//             <CartItem 작명={장바구니} />
+//         </div>
+//     )
+// }
+
+// function CartItem(props) {
+//     return (
+//         <div className="cart-item">
+//             <p>상품명 {가져와보깅} {props.작명}</p>
+//             <p>$40</p>
+//             <p>1개</p>
 //         </div>
 //     )
 // }
 
 //------------------------------------------------------------//
 
-// component 만드는 법
-// 1. function 작명() { }
-// 2. return (축약하고 싶은 것 넣기)
-// 3. 작명한 것 html 안에 넣기
+// props 문법
+// 1. <자식 component 작명="전할데이터"/>
+// 위에서는 Cart컴포넌트안의 <CartItm 작명="전할데이터"/>
 
-// 재사용할 코드 컴포넌트 만들기
-// page.js 크게 만들 때
+// 2. 자식은 props.작명 사용
+// 위에서는 CartItem 컴포넌트에 props 받으면서 <p>상품명 {가져와보깅} {props.작명}</p>
+// 그러면 부모가 보낸 데이터가 남음 / 전할데이터가 남음
+
+// - 중괄호 열어서 변수, 함수 등 아무거나 전송가능
+// 위에서는 <CartItem 작명={장바구니} /> 장바구니에     let 장바구니 = ['melon', 'watermelon'] 담아서 보냄
+
+// 비슷한 컴포넌트 사용할 때 props 이용
 
 //------------------------------------------------------------//
 
-import 가져와보깅 from './data.js'
-// 하나 import 해올 때는 위에처럼 작명 마음대로 가능(근데 헷갈리지 않게 변수,함수명 그대로 쓰는 경향)
-// 여러개 import 해올 때는 {age,다른것} 이런식으로 export한 변수,함수명 그대로 사용
-
 export default function Cart() {
+    let 장바구니 = ['melon', 'watermelon']
     return (
         <div>
-            <CartItem />
+            <CartItem item={장바구니[0]} />
+            <CartItem item={장바구니[1]} />
+            <Banner content="헤일리카드" />
+            <Banner content="햄햄카드" />
+            <Btn color="blue" />
         </div>
     )
 }
 
-function CartItem() {
+function Banner(props) {
+    return <h5>{props.content} 결제 행사중</h5>
+}
+
+function CartItem(props) {
     return (
+        // let 장바구니 = ['melon', 'watermelon']
+        // 그냥 여기에 추가하면 안되는지 ? > 그러면 여러번 div여러개일때 여러번 부르게 됨
+        // 그치만 next.js에서는 같은 데이터 요청이 여러개면 1개로 압축해줌(deduplication가능)
         <div className="cart-item">
-            <p>상품명 {가져와보깅}</p>
+            <p>{props.item}</p>
             <p>$40</p>
             <p>1개</p>
         </div>
     )
 }
 
-//------------------------------------------------------------//
-
-// Next.js에서 컴포넌트는 2종류 (client, server)
-// 아무곳에나 만드는 것은 server component
-// 파일 맨 위에 'use client'넣고 만든건 client component(밑에있는건 전부 client component됨)
-
-//------------------------------------------------------------//
-
-// sever component
-// - html에 자바스크립트 기능 넣기 불가능
-// - useState, useEffect등 사용불가
-// - 로딩속도 빠름
-// - 검색엔진 노출 유리
-
-//------------------------------------------------------------//
-
-// client component는 가능
-// - onClick={()=>{}} 가넝
-// - useState, useEffect등 가넝
-// - 로딩속도 느림1(자바스크립트 많이 필요)
-// - 로딩속도 느림2(hydration 필요)
-// hydration : html 유저에게 보낸 후에 자바스크립트로 html 다시 읽고 분석하는 일
-
-//------------------------------------------------------------//
-
-// 추천
-// 큰 페이지는 sever component
-// 페이지 내에서 JS 기능 필요한 곳만 client component 
-
+function Btn(props) {
+    return <button style={{ background: props.color }}>button</button>
+}
