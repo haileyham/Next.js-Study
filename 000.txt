@@ -1,0 +1,11 @@
+# 1. Next.js 프로젝트 생성
+npx create-next-app@latest
+npx create-next-app@latest --experimental-app
+yes / projectname / TS / ESLint / Tailwind CSS / `src/` / App Router / import alias
+
+---------------------------------------
+
+# 2. 프로젝트 생성
+해당 폴더 오픈해서 진행
+
+---------------------------------------
