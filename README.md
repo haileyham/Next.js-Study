@@ -10,3 +10,28 @@
 - props
 - 좋아요 버튼
 
+## 🌱 게시판
+- MongoDB 셋팅 및 Next.js에서 MongoDB 사용
+
+- 글목록 조회기능
+
+- 상세페이지
+: Dynamic route / useRouter
+
+- 글 작성기능
+- 수정 기능
+
+- 삭제 기능
+: Ajax, query string / URL parameter
+
+- 회원 기능
+: Auth.js 소셜 로그인 / session / JWT / refresh token
+
+- 댓글 기능
+: useEffect
+
+- 이미지 업로드
+: AWS S3 셋팅 / Presigned URL
+
+- Dark Mode 기능
+: cookies / localStorage
