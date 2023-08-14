@@ -1,44 +1,45 @@
 import { connectDB } from '@/util/database';
-import { MongoClient } from 'mongodb'
 import React from 'react'
-
-// export default async function Home() {
-
-//     //mongodb 연결
-//     const client = await connectDB; // util/databse.js에 따로 빼둔 것 import 해오기
-//     const db = client.db("forum"); //database name 연결
-//     let result = await db.collection('post').find().toArray(); // collection name // 실행하면 mongodb 데이터 출력 / post 컬렉션의 모든 document 꺼내와서 array로 만들어 출력
-//     console.log(result); // 터미널에 나옴
-
-//     return (
-//         <div>안녕
-
-//         </div>
-//     )
-// }
-
-//------------------------------------------------------------//
-
-// DB 입출력 코드는 server component 안에서만 사용하기
-// 민감한 자료들 있기 때문에 client component에서는 하지말도록!
-
-//------------------------------------------------------------//
-
-// 조금더 축약한 코드 사용하고 싶다면
-
-//------------------------------------------------------------//
-
-
 
 export default async function Home() {
 
-    const db = (await connectDB).db("forum"); //이렇게 써도 되고, await 붙는 것도 축약하고 싶으면 export 단계에서 넣어주면 됨(topLevelAwait:true). 근데 복잡,버전문제 있어서 지금은 그냥 이렇게 쓰기.
+    const db = (await connectDB).db("forum");
     let result = await db.collection('post').find().toArray();
     console.log(result);
 
     return (
-        <div>안녕
-
+        <div>
+            안녕
         </div>
     )
 }
+
+// ------------------------------------------------------------//
+
+// 처음 보는 세부기능 만들기 : 
+// 1. 어떤 식으로 동작하는지 상세하게 한글로 설명
+// 2. 코드로 짜기
+
+// ------------------------------------------------------------//
+
+// 글 목록 페이지 / 기능
+// 1. HTML 페이지 필요
+// 2. 페이지 방문할 때 DB에서 글 꺼내오기
+// 3. 글들 HTML 집어넣기
+
+// 이렇게 해놔야 검색할 때도 편함
+// 단순히 '게시판 어떻게 만들어요?'가 아닌
+// 'MongoDB에서 글 꺼내는 법' 이렇게 검색 가능
+
+// ------------------------------------------------------------//
+
+// 1. 글 목록 보여줄 HTML 페이지 : App/list/page.js
+
+// 2. 페이지 방문할 때 DB에서 글 꺼내오기 
+// - 글 내용이 별로 없기 때문에 DB에다가 2번째 글 추가하고 오기(document)
+// ```
+// const db = (await connectDB).db("forum");
+// let result = await db.collection('post').find().toArray();
+// ```
+
+// 3. HTML 집어넣기 : map으로 넣기

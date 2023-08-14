@@ -7,3 +7,11 @@ npm install mongodb
 - util/databse.js에 셋팅코드
 - page.js에서 위의 connectDB import
 - 보안 .gitignore로 dburl 따로빼놓기
+
+//------------------------------------------------------------//
+
+# 게시판 
+- 글목록 조회 기능
+- 상세페이지
+- 글발행 기능
+- 수정삭제 기능
