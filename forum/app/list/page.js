@@ -1,6 +1,7 @@
 import { connectDB } from '@/util/database';
 import Link from 'next/link';
 import React from 'react'
+import DetailLink from './DetailLink';
 
 export default async function List() {
     const db = (await connectDB).db("forum");
@@ -18,8 +19,8 @@ export default async function List() {
                                 <h4>{result[i].title}</h4>
                                 <p>{result[i].content}</p>
                                 {/* a.title 혹은 a.content 같기 때문에취향차이 */}
-
                             </Link>
+                            <DetailLink />
                         </div>
                     )
                 })
