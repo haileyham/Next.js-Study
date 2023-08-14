@@ -1,0 +1,9 @@
+# MongoDB 회원가입 및 셋팅
+
+# MongoDB 설치
+npm install mongodb
+
+# mongodb 연결
+- util/databse.js에 셋팅코드
+- page.js에서 위의 connectDB import
+- 보안 .gitignore로 dburl 따로빼놓기
