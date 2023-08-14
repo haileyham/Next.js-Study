@@ -20,7 +20,7 @@ export default async function List() {
                                 <p>{result[i].content}</p>
                                 {/* a.title 혹은 a.content 같기 때문에취향차이 */}
                             </Link>
-                            <DetailLink />
+                            {/* <DetailLink /> */}
                         </div>
                     )
                 })
