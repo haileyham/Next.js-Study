@@ -1,23 +1,29 @@
+import { connectDB } from '@/util/database';
 import React from 'react'
 
-// export default function handler(요청, 응답) {
-//     console.log(123);
-//     return 응답.status(200).json('처리완료')
-// }
+export default async function handler(요청, 응답) {
+    const db = (await connectDB).db("forum");
+    let result = await db.collection('post').find().toArray();
 
-// 서버는 기능실행 후에 유저에게 응답해야함
-// 첫째파라미터 요청 : 요청과 관련된 정보
-// 둘째파라미터 응답 : 응답도와줌
-
-//------------------------------------------------------------//
-
-// 서버에 GET / POST 요청오면 각각 다른 코드 실행하도록
-
-export default function handler(요청, 응답) {
+    // 글발행 요청
     if (요청.method === "POST") {
-        return 응답.status(200).json("포스트 처리완료")
-    } else if (요청.method === "GET") {
-        console.log(123);
-        return 응답.status(200).json("겟겟 처리완료")
+        return 응답.status(200).json(요청.body); //input(name="title") 입력한 것 출력
+    }
+
+    //DB에 있던 글들 모두 요청
+    // else if (요청.method === "GET") {
+    //     console.log(123);
+    //     return 응답.status(200).json(result)
+    // } 
+
+    // 현재 날짜, 현재 시간 요청
+    // else if (요청.method === "GET") {
+    //     const date = new Date();
+    //     return 응답.status(200).json(date)
+    // }
+
+    // 글발행 가져오기
+    else if (요청.method === "GET") {
+        return 응답.status(200).json(result)
     }
 }
