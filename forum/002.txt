@@ -24,7 +24,7 @@
 
 //------------------------------------------------------------//
 
-[글작성기능]
+[글작성기능]★★
 1. 글작성페이지 필요
 2. 버튼 누르면 서버에 글 저장하도록 부탁
 3. 서버는 글 받으면 검사해보고 DB에 저장
@@ -114,3 +114,61 @@ export default function handler(요청, 응답) {
 ```
 
 //------------------------------------------------------------//
+
+
+```
+import { connectDB } from '@/util/database';
+import React from 'react'
+
+export default async function handler(요청, 응답) {
+    const db = (await connectDB).db("forum");
+    let result = await db.collection('post').find().toArray();
+
+    // 글발행 요청
+    if (요청.method === "POST") {
+        return 응답.status(200).json(요청.body); //input(name="title") 입력한 것 출력
+    }
+
+    //DB에 있던 글들 모두 요청
+    // else if (요청.method === "GET") {
+    //     console.log(123);
+    //     return 응답.status(200).json(result)
+    // } 
+
+    // 현재 날짜, 현재 시간 요청
+    // else if (요청.method === "GET") {
+    //     const date = new Date();
+    //     return 응답.status(200).json(date)
+    // }
+
+    // 글발행 가져오기
+    else if (요청.method === "GET") {
+        return 응답.status(200).json(result)
+    }
+}
+```
+//------------------------------------------------------------//
+
+[서버는 요청받으면 DB에 글 저장]
+- app/write/page.js에서 
+```
+<form action="/api/post/new" method="POST">
+    {/* 서버/api/post/new로 보내짐 > 유저가 /api/post/new로 요청시 실행됨 */}
+    <input type="text" name="title" placeholder="글 제목" />
+    <input type="text" name="content" placeholder="글 내용" />
+</form>
+```
+- 유저가 input에 입력하고 버튼 누르면 /api/post/new 요청 > 실행됨
+
+//------------------------------------------------------------//
+
+pages/api/post/new.js
+서버 요청시 실행될 코드들 작성
+- POST 요청으로 
+- 빈칸 방지
+- 서버 에러
+- 중복클릭(나중해보도록하기)
+
+//------------------------------------------------------------//
+
+
