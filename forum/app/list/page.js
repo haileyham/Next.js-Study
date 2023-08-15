@@ -17,9 +17,10 @@ export default async function List() {
                         <div className="list-item" key={i}>
                             <Link href={`/detail/${result[i]._id}`}>
                                 <h4>{result[i].title}</h4>
-                                <p>{result[i].content}</p>
-                                {/* a.title 혹은 a.content 같기 때문에취향차이 */}
                             </Link>
+                            <Link href={`/edit/${a._id}`}>수정🖍</Link>
+                            <p>{result[i].content}</p>
+                            {/* a.title 혹은 a.content 같기 때문에취향차이 */}
                             {/* <DetailLink /> */}
                         </div>
                     )
