@@ -16,6 +16,7 @@ export default function RootLayout({ children }) {
                 <div className="navbar">
                     <Link href="/" className="logo">HaileyForum</Link>
                     <Link href="/list">List</Link>
+                    <Link href="/write">Write</Link>
                 </div>
                 {children}</body>
         </html>
