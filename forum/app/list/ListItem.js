@@ -17,27 +17,27 @@ export default function ListItem({ result }) {
                             </Link>
                             <Link href={`/edit/${a._id}`}>수정🖍</Link>
                             <span style={{ cursor: "pointer" }} onClick={(e) => {
-                                // fetch('/api/post/delete', {
-                                //     method: "DELETE",
-                                //     body: result[i]._id
-                                // }).then((result) => {
-                                //     result.json()
-                                // }).then(() => {
-                                //     e.target.parentElement.style.opacity = 0;
-                                //     setTimeout(() => {
-                                //         e.target.parentElement.style.display = 'none'
-                                //     }, 1000)
-                                // })
+                                fetch('/api/post/delete', {
+                                    method: "DELETE",
+                                    body: result[i]._id
+                                }).then((result) => {
+                                    result.json()
+                                }).then(() => {
+                                    e.target.parentElement.style.opacity = 0;
+                                    setTimeout(() => {
+                                        e.target.parentElement.style.display = 'none'
+                                    }, 1000)
+                                })
 
-                                fetch(`/api/abc/${result[i]._id}`)
-                                    .then((result) => {
-                                        result.json()
-                                    }).then(() => {
-                                        e.target.parentElement.style.opacity = 0;
-                                        setTimeout(() => {
-                                            e.target.parentElement.style.display = 'none'
-                                        }, 1000)
-                                    })
+                                // fetch(`/api/abc/${result[i]._id}`)
+                                //     .then((result) => {
+                                //         result.json()
+                                //     }).then(() => {
+                                //         e.target.parentElement.style.opacity = 0;
+                                //         setTimeout(() => {
+                                //             e.target.parentElement.style.display = 'none'
+                                //         }, 1000)
+                                //     })
                             }}> 삭제🗑</span>
                             <p>{result[i].content}</p>
                         </div>

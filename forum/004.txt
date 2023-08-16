@@ -1,0 +1,79 @@
+//------------------------------------------------------------//
+
+# 프로젝트 배포
+- npm run build
+- 코드짠 것을 html js css 파일들로 바꿔줌
+- ○ : static rendering
+- λ : dynamic rendering
+
+//------------------------------------------------------------//
+
+[○ : static rendering]
+- 기본적으로 static rendering (디폴트)
+- npm run build 할 때 만든 html 페이지 그대로 유저에게 보냄
+- 미리 페이지 완성본을 만들어놨기 때문에 전송 빠름
+
+//------------------------------------------------------------//
+
+[λ : dynamic rendering]
+- 유저가 페이지 접속마다 html 새로 만들어서 보내줌
+
+# 페이지에서 사용시 자동으로 λ dynamic rendering 해줌
+    - fetch('/',{cache:'no-store})
+    - useSearchParams()
+    - cookies()
+    - headers()
+    - [dynamic route]
+
+# 매번 새로 html 그려줘야하는 것들 (dynamic rendering 필요한 것을) 직접 수정해보기
+- ○ /list 
+
+# npm run start
+- npm run dev와 다르게
+- 실제 페이지 띄워줌
+- /list 페이지 접속해보기
+- /write 페이지에서 글쓰고 /list 들어가보면 새로운 글 뜨지 않음
+- 왜냐공? static rendering 중이기 때문(npm run build 할 때 나온 html만 계속 보여줌)
+- dynamic rendering 으로 수정 필요
+
+# dynamic rendering
+- 해당 페이지 상단에 export const dynamic = 'force-dynamic' 추가
+- dynamic 예약어가 dynamic rendering해줌 (static은 'force-static')
+- npm run build 다시하고 : λ /list  바뀐것 확인 가능
+- npm run start  / npm start 다시시작
+- 오호! 확인 가능!
+
+//------------------------------------------------------------//
+
+# dynamic render 단점
+1. 서버/DB 부담 높아짐
+- 캐싱기능 사용가능(서버자원 부담 줄여줌)
+- 캐싱 : 결과 데이터를 잠깐 저장해두고 재사용
+- 즉, 페이지 캐싱은 페이지 완성본을 잠깐 저장해두고 재사용
+- GET 요청결과 캐싱 : GET 요청 결과 잠깐 저장해두고 재사용
+- 예를들어    await fetch('/URL', {cache:'force-cache'}) 이렇게 있으면
+- 해당 URL 그때그때 서버에서 불러오는 것이 아니라 어디에 저장해두고 재사용
+
+- (주의)사실 뒤에 {cache:'force-cache'}안적어도 기본적으로 fetch는 캐싱됨
+- 실시간 데이터 중요하면 {cache:'no-store'} 쓰면 됨
+- 60초마다 캐싱된 데이터 갱신 {revalidate : 60}
+- 캐싱된 데이터는 하드용량 차지
+
+//------------------------------------------------------------//
+
+- DB 출력 결과 캐싱가능? 2가지 방법
+[1] fetch()로 바꾸면 됨
+- 이 기능을 서버 API 로 바꾸고 fetch URL로 불러오면 됨
+    const db = (await connectDB).db("forum");
+    let result = await db.collection('post').find().toArray();
+[2] revalidate 예약변수 쓰면 페이지단위 캐싱가능
+- 유저가 페이지 방문시 캐싱됨
+- export const revalidate = 60; 
+- 60초동안 캐싱됨(60초지나면 다시 캐싱 / 예전 next.js에선 ISR이라고 부름)
+
+//------------------------------------------------------------//
+
+
+
+
+
