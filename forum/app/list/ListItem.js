@@ -7,7 +7,7 @@ export default function ListItem({ result }) {
 
 
     return (
-        <div>
+        <div className='hello'>
             {
                 result.map((a, i) => {
                     return (
@@ -16,22 +16,17 @@ export default function ListItem({ result }) {
                                 <h4>{result[i].title}</h4>
                             </Link>
                             <Link href={`/edit/${a._id}`}>수정🖍</Link>
-                            <span style={{ cursor: "pointer" }} onClick={() => {
+                            <span style={{ cursor: "pointer" }} onClick={(e) => {
                                 fetch('/api/post/delete', {
                                     method: "DELETE",
                                     body: result[i]._id
-                                }).then((r) => {
-                                    if (r.status == 200) {
-                                        return r.json()
-                                    } else {
-                                        //서버가 에러코드전송시 실행할코드
-                                    }
                                 }).then((result) => {
-                                    //성공시 실행할코드
-                                    console.log(result) //delete.js에서 보낸 json 삭제완료문구뜸
-                                }).catch((error) => {
-                                    //인터넷문제 등으로 실패시 실행할코드
-                                    console.log(error)
+                                    result.json()
+                                }).then(() => {
+                                    e.target.parentElement.style.opacity = 0;
+                                    setTimeout(() => {
+                                        e.target.parentElement.style.display = 'none'
+                                    }, 1000)
                                 })
                             }}> 삭제🗑</span>
                             <p>{result[i].content}</p>
@@ -43,9 +38,19 @@ export default function ListItem({ result }) {
     )
 }
 
-//(참고) DELETE 요청시 데이터안가면 POST 로 바꿔서 하기
-// fetch통해서 DELETE, body에는 props로 받은 DB의 id값 넘겨주고 있음
+// 애니메이션 주기
+// 1. 애니메이션 동작 전, 동작 후의 CSS 스타일을 생각해보고
+// 2. 애니메이션 동작 전 스타일 넣어주고
+// 3. transition 스타일도 넣어주고
+// 4. 원하는 시점에 애니메이션 동작 후 스타일을 넣기
 
-// [1] Ajax 요청 완료시 코드실행은 fetch().then(()=>{})
-// [2] Ajax 요청 완료시 서버가 보낸 데이터 출력
-// [3] Ajax 에러처리 
+// opacity 주면서 안보이도록 해주기
+// onClick에 e
+// 성공적 서버 통신후 .then에 e.target (유저가 방금 클릭한 html요소)
+// e.target.parentElement.style.opacity (유저가 클릭한 html요소의 부모요소 style)
+
+// 공간 그대로 차지하니까, div 박스도 없애주기
+// setTimeout(() => {
+//     e.target.parentElement.style.display = 'none'
+// }, 1000)
+// 1초후에 박스 없애주도록
