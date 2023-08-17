@@ -9,14 +9,15 @@ a{
 
 .navbar {
     background: white;
-    padding: 2rem;
-    display:flex;
-    justify-content: space-between;
+    margin:0;
+    padding: 1.3rem;
+    display: flex;
     align-items: center;
-  }
+    box-sizing: border-box;
+    justify-content: space-between;
+}
 
   .navbar a {
-    margin-right: 10px;
     text-decoration: none;
     color: black;
   }
@@ -70,8 +71,9 @@ a{
 .userLogin{
     display:flex;
     align-items: center;
-    gap:1em;
+    gap:0.5rem;
     color:gray;
+    font-size: 0.8rem;
 }
 
 .loginImg{

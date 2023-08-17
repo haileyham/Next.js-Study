@@ -1,0 +1,64 @@
+//------------------------------------------------------------//
+
+회원기능 만들기
+1. 소셜로그인 -Auth.js
+2. OAuth session 방식 사용
+3. 아이디/비번 + JWT
+4. JWT -refresh token
+
+//------------------------------------------------------------//
+
+# 1. 소셜로그인
+OAuth
+NextAuth -session
+signIn(), signOut() -client component
+getServerSession() -server component
+
+1. github에서 OAuth용 어플리케이션 만들기
+2. NextAuth 라이브러리 설치 및 셋팅
+3. ID, Secret 키 등은 중요한 정보이기 때문에 따로 빼기
+4. 로그인 버튼 만들기 / nav 만드려고 하는데, server component에서 onClick불가하기때문에 Btn컴포넌트 client component로 만들어서 코드 작성 // 라이브러리 설치할 때, 다 있기 때문에 signIn() import해서 쓰면됨 // 그리고서 다시 nav로 Btn 컴포넌트import해서 쓰기
+5. 로그인 된 유저정보 출력(서버 컴포넌트, 서버기능 안에서 사용가능 / getServerSession(), authOptions 두개 import 하고 async,await 붙이기
+    console.log(session); // server component이기때문에 터미널에서 확인 가능)
+6. 로그인 상태에 따른 상단바 조정
+- 로그인상태 : 프로필이미지,이름 / 로그아웃버튼
+- 로그아웃 상태 : 로그인버튼
+
+//------------------------------------------------------------//
+
+# 2. OAuth session 방식
+Next-auth 라이브러리 사용하면 기본적으로 JWT 방식으로 사용
+유저 세션데이터를 DB에 저장해두지 않고 JWT만 유저에게 보내고
+유저가 로그인이 필요한 페이지 방문시 유저가 제출한 JWT만 검사해서 입장
+
+[session 방식 도입 가능] [DB adapter 사용시]
+1. 첫 로그인시 자동회원가입(DB에 보관)
+2. 로그인시 DB에 세션정보 보관
+3. 현재 로그인된 유저정보 필요하면 DB에서 조회
+
+[설치] 
+- npm install @next-auth/mongodb-adapter
+(에러발생시 뒤에 두개 입력(mongoDB 4.0에서 잘작동하기때문) npm uninstall mongodb / npm install mongodb@4)
+
+[DB adapter 셋팅]
+pages/api/auth/[...nextauth].js
+- adapter: MongoDBAdapter(connectDB) import해서 추가
+(다른 DB사용하려면 다른 DB adapter찾아서 사용가능)
+(예를들어 redis 많이 쓰는데 ram에 저장하기 때문에 빠름)
+
+[셋팅연결해두고 로그인한다음, mongoDB 들어가서 database보면 새로운 test collection 생겨있음]
+1. sessions : 현재 로그인된 유저 세션정보 저장용(악성유저 강제 로그아웃가능)
+2. users : 가입된 유저정보
+3. accounts : 가입된 유저의 계정정보
+
+users랑 accounts 나눈이유는 한명의 user가 여러개의 계정을 가질 수도 있기 때문
+- 예를들어서 한명이 Giuhub, Google 계정 이메일이 같으면, user에는 1개 accounts에는 2개
+- user 구분은 email로 하기(email 같으면 같은계주로)
+
+Q 만일 다른 database에 담고싶으면?
+- databse.js uri에 mongodb.net/?retryWrites 이부분을 mongodb.net/forum?retryWrites
+- forum 추가하면 forum에 저장됨
+
+//------------------------------------------------------------//
+
+
