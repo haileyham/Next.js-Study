@@ -1,18 +1,16 @@
 import NextAuth from "next-auth";
 import GithubProvider from "next-auth/providers/github";
 
+const config = require('./config')
+
 export const authOptions = {
     providers: [
         GithubProvider({
-            clientId: 'Github에서 발급받은ID',
-            clientSecret: 'Github에서 발급받은Secret',
-        }),
-        GithubProvider({
-            clientId: 'Github에서 발급받은ID',
-            clientSecret: 'Github에서 발급받은Secret',
+            clientId: config.github.clientId,
+            clientSecret: config.github.clientSecret,
         }),
     ],
-    secret: 'jwt생성시쓰는암호'
+    secret: config.jwt.secret
 };
 export default NextAuth(authOptions);
 
