@@ -37,3 +37,6 @@ next-env.d.ts
 #util(json / JS모듈 두개의 방식)
 util/config.json
 util/config.js
+
+#pages/api/auth(JS모듈 방식)
+pages/api/auth/config.js
