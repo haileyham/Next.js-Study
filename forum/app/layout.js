@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import './globals.css'
 import { Inter } from 'next/font/google'
-import LoginBtn from './LoginBtn'
+import { LoginBtn, LogoutBtn } from './LoginoutBtn'
 import { getServerSession } from 'next-auth'
 import { authOptions } from '@/pages/api/auth/[...nextauth]'
 
@@ -25,7 +25,17 @@ export default async function RootLayout({ children }) {
                     <Link href="/list">List</Link>
                     <Link href="/write">Write</Link>
                     {/* button에 onClick 못하기 때문에 client component로 버튼 만들고 import해와서 쓰기 / 로그인 연결 라이브러리 함께있기때문에 signIn()하면됨 */}
-                    <LoginBtn />
+                    {/* <LoginBtn /> */}
+                    {/* 로그인 유저정보 있을 경우 유저이름&로그아웃버튼 / 유저정보 없을 경우 로그인버튼 */}
+                    <span></span>
+                    {
+                        session ? <span className="userLogin" >
+                            <img src={session.user.image} alt={session.user.name} className="loginImg" />
+                            {session.user.name}
+                            <LogoutBtn />
+                        </span>
+                            : <LoginBtn />
+                    }
                 </div>
                 {children}</body>
         </html>

@@ -9,8 +9,12 @@ a{
 
 .navbar {
     background: white;
-    padding: 20px;
+    padding: 2rem;
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
   }
+
   .navbar a {
     margin-right: 10px;
     text-decoration: none;
@@ -63,3 +67,14 @@ a{
     transition: all 1s;
   }
 
+.userLogin{
+    display:flex;
+    align-items: center;
+    gap:1em;
+    color:gray;
+}
+
+.loginImg{
+    width:2rem;
+    border-radius: 50%;
+}
