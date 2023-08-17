@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import './globals.css'
 import { Inter } from 'next/font/google'
+import LoginBtn from './LoginBtn'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -17,6 +18,8 @@ export default function RootLayout({ children }) {
                     <Link href="/" className="logo">HaileyForum</Link>
                     <Link href="/list">List</Link>
                     <Link href="/write">Write</Link>
+                    {/* button에 onClick 못하기 때문에 client component로 버튼 만들고 import해와서 쓰기 / 로그인 연결 라이브러리 함께있기때문에 signIn()하면됨 */}
+                    <LoginBtn />
                 </div>
                 {children}</body>
         </html>

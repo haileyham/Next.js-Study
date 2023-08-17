@@ -55,6 +55,7 @@ a{
     background: lightgray;
     border: none;
     border-radius: 5px;
+    cursor: pointer;
   } 
 
   .list-item{
