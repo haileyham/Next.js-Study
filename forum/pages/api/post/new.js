@@ -1,7 +1,22 @@
 import { connectDB } from '@/util/database';
+import { getServerSession } from 'next-auth';
 import React from 'react'
+import { authOptions } from '../auth/[...nextauth]';
 
 export default async function handler(요청, 응답) {
+    let session = await getServerSession(요청, 응답, authOptions); //서버에서 사용할 때는 요청,응답 같이 받아야함 / authOption은 계정정보 가져오는것 [...nextauth].js에 있음
+    // console.log(session)
+
+    if (session) {// session.user.email 쓰는데 만약 로그아웃했을때는 user가 null값 들어가기 때문에 session이 true일때만 작동하도록 if 문 사용
+        요청.body.author = session.user.email; //요청.body에다가 author 추가하기. 값은 session.user.email로 넣기
+        // console.log(요청.body) / 아래 출력됨
+        // [Object: null prototype] {
+        //     title: 'aaa',
+        //     content: 'aaa',
+        //     author: 'roserealslow@gmail.com'
+        //   }
+    }
+
     if (요청.method === "POST") {
         if (요청.body.title == '') {
             return 응답.status(400).json('제목을 입력행!') // 400 Bad Request
@@ -50,3 +65,9 @@ export default async function handler(요청, 응답) {
 // 근데 빠르게 연타한건 이 방법으로 못막네..
 // 일단 클라측에서 막고, 서버측은 express-rate-limit 해봐야겠다 추후에!_!
 // https://inpa.tistory.com/entry/NODE-%F0%9F%93%9A-API-%EC%82%AC%EC%9A%A9%EB%9F%89-%EC%A0%9C%ED%95%9C%ED%95%98%EA%B8%B0
+
+//------------------------------------------------------------//
+//------------------------------------------------------------//
+
+// 글 작성시 글쓴이 정보도 같이 저장
+// 
