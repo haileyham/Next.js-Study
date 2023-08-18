@@ -15,10 +15,10 @@ export default async function handler(요청, 응답) {
                 let result = await db.collection('post').deleteOne({ _id: new ObjectId(요청.body) });
                 return 응답.status(200).json('삭제완료') //삭제완료 문구를 보내고있음
             } else {
-                return 응답.status(500).json('현재유저와 작성자 불일치')
+                return 응답.status(500).json({ error: '현재유저와 작성자 불일치' }) //error메시지 맞게 띄우려고 error에 담음 > 클라이언트에서는 errorData.error로 출력
             }
         } else {
-            return 응답.status(401).json('로그인 필요');
+            return 응답.status(401).json({ error: '로그인 필요' });
         }
     }
 }
