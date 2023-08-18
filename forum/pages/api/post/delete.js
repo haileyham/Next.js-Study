@@ -1,14 +1,25 @@
 import { connectDB } from '@/util/database';
 import { ObjectId } from 'mongodb';
+import { getServerSession } from 'next-auth';
 import React from 'react'
+import { authOptions } from '../auth/[...nextauth]';
 
 export default async function handler(요청, 응답) {
-    try {
+    if (요청.method == "DELETE") {
+        let session = await getServerSession(요청, 응답, authOptions)
         const db = (await connectDB).db("forum");
-        let result = await db.collection('post').deleteOne({ _id: new ObjectId(요청.body) });
-        return 응답.status(200).json('삭제완료') //삭제완료 문구를 보내고있음
-    } catch (error) {
-        return 응답.status(500).json('삭제에러')
+        let 찾자 = await db.collection("post").findOne({ _id: new ObjectId(요청.body) })
+
+        if (session) {
+            if (찾자.author === session.user.email) {
+                let result = await db.collection('post').deleteOne({ _id: new ObjectId(요청.body) });
+                return 응답.status(200).json('삭제완료') //삭제완료 문구를 보내고있음
+            } else {
+                return 응답.status(500).json('현재유저와 작성자 불일치')
+            }
+        } else {
+            return 응답.status(401).json('로그인 필요');
+        }
     }
 }
 
@@ -18,3 +29,5 @@ export default async function handler(요청, 응답) {
 // connectDB,ObjectID import 까먹지 말기 !
 
 // 삭제후 새로고침
+
+// alert() 웹 브라우저 함수라 서버사이드에서는 작동x
