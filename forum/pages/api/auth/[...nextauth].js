@@ -46,8 +46,8 @@ export const authOptions = {
 
     //3. jwt 써놔야 잘됨 + jwt 만료일설정
     session: {
-        strategy: 'jwt',
-        maxAge: 30 * 24 * 60 * 60 //30일
+        strategy: 'jwt', //세션 or jwt 쓸 지 결정하는 부분인데 jwt 사용해야 잘됨
+        maxAge: 30 * 24 * 60 * 60 //30일 / 로그인 유지기간 / 하루만 하고 싶으면 24 * 60 * 60
     },
 
 
@@ -57,14 +57,14 @@ export const authOptions = {
         jwt: async ({ token, user }) => {
             if (user) {
                 token.user = {};
-                token.user.name = user.name
+                token.user.name = user.name //유저 정보 보낼 수 있음, 추가 가능 / (모든 글 수정/삭제 가능한)관리자 로그인 필요할 때 role 부여해서 admin,normal로 나눠서 role-based auth / 
                 token.user.email = user.email
             }
             return token;
         },
         //5. 유저 세션이 조회될 때 마다 실행되는 코드
         session: async ({ session, token }) => {
-            session.user = token.user;
+            session.user = token.user; //컴포넌트 안에서 보여줄 유저정보 / 토큰에 있던 모든 데이터들을 보내는 것
             return session;
         },
     },
