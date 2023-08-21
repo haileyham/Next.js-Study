@@ -59,6 +59,7 @@ export const authOptions = {
                 token.user = {};
                 token.user.name = user.name //유저 정보 보낼 수 있음, 추가 가능 / (모든 글 수정/삭제 가능한)관리자 로그인 필요할 때 role 부여해서 admin,normal로 나눠서 role-based auth / 
                 token.user.email = user.email
+                token.user.role = user.role
             }
             return token;
         },
