@@ -30,7 +30,8 @@ export default async function Detail(props) {
             <h2>{result.title}</h2>
             <p>{result.content}</p>
             {/* 댓글 컴포넌트(클라이언트 컴포넌트 댓글바로 반영되도록) */}
-            <Comment />
+            {/* 하위컴포넌트에 detail 글아이디 보냄 */}
+            <Comment _id={result._id.toString()} />
         </div>
     )
 }
