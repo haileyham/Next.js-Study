@@ -10,16 +10,21 @@ export default async function handler(요청, 응답) {
         const db = (await connectDB).db("forum");
         // console.log(요청.body)
         let 찾자 = await db.collection("post").findOne({ _id: new ObjectId(요청.body._id) })
-        console.log(찾자)
+        // console.log(찾자)
 
         if (요청.body.title == '') {
             return 응답.status(400).json('제목을 입력행!') // 400 Bad Request
         }
 
         if (session) {
+
             if (찾자.author === session.user.email) {
                 let 수정 = { title: 요청.body.title, content: 요청.body.content }
-                const db = (await connectDB).db("forum");
+                let result =
+                    await db.collection('post').updateOne({ _id: new ObjectId(요청.body._id) }, { $set: 수정 })
+                return 응답.status(200).redirect(302, '/list')
+            } if (session.user.role === "admin") {
+                let 수정 = { title: 요청.body.title, content: 요청.body.content }
                 let result =
                     await db.collection('post').updateOne({ _id: new ObjectId(요청.body._id) }, { $set: 수정 })
                 return 응답.status(200).redirect(302, '/list')
