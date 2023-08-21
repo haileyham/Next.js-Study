@@ -70,7 +70,44 @@ Q 본인이 쓴 글만 수정/삭제
 - if (session) {요청.body.author = session.user.email; }
 - session.user.email 쓰는데 만약 로그아웃했을때는 user가 null값 들어가기 때문에 session이 true일때만 작동하도록 if 문 사용
 
+[글삭제시 글쓴이 일치 & 로그인여부]
+- 서버에서 일치하는지 확인
+- ListItem에서 에러 메시지 각각 처리
 
 //------------------------------------------------------------//
 
+# 3. 아이디/비번 + JWT
+- CredentialsProvider()
+- JWT만 가능
+
+[회원가입기능 필요]
+1. 회원가입 페이지 만들기 app/register/page.js
+2. 서버는 가입요청 받으면 DB에 저장 api/auth/signup
+
+[가입요청 DB 저장]
+1. user_cred 콜렉션에 회원정보 보관 / 유저가 보낸 요청.body를 넣어줌{name:abc,email:abc,password:abc}들어감 
+2. 비번은 암호화 처리 필요
+    2-1. 비번 암호화해서 저장 : 라이브러리 npm install bcrypt 설치
+    2-2. 비번암호화해서 저장, 숫자는 아무숫자기입(암호화정도임)
+    let hash = await bcrypt.hash(요청.body.password, 10); 
+    2-3. pw부분 암호화한걸로 변경해주기
+3. 고려사항
+- 빈값
+- 중복된 이메일 체크
+- name, eamil, pw 정규식
+4. CredentialsProvider
+- 
+5. 관리자 페이지
+- 관리자 모든 글 수정/삭제 가능하도록
+- role : "admin" 부여
+- role-based auth
+6. 로그인 한 사람만 write 페이지 접속가능하도록
+- app/write/page.js
+7. 중요정보
+- .env 파일 만들어서 아용하기
+- 예를들어 NEXTAUTH_SECRET='secretkey1234' 이렇게 적고
+- secret: process.env.NEXTAUTH_SECRET 이렇게 사용하면 위의 것이 남음
+- 이것도 .gitignore
+
+//------------------------------------------------------------//
 
