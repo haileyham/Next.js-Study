@@ -27,8 +27,8 @@ import React, { useState } from 'react';
 
 export default function Comment({ _id }) {
     const [comment, setComment] = useState('');
-    console.log(comment);
-    console.log(_id)
+    // console.log(comment);
+    // console.log(_id);
 
     const handleSubmit = async () => {
         try {
@@ -45,6 +45,8 @@ export default function Comment({ _id }) {
                 // 성공적으로 처리된 경우에 대한 로직 추가
             } else {
                 // 에러 처리 로직 추가
+                const errorResponseData = await response.json();
+                console.error('Error response:', errorResponseData);
             }
         } catch (error) {
             console.error('Error sending comment:', error);
