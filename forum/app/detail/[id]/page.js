@@ -1,6 +1,7 @@
 import { connectDB } from '@/util/database';
 import { ObjectId } from 'mongodb';
 import React from 'react'
+import Comment from './Comment';
 
 export default async function Detail(props) {
     const db = (await connectDB).db("forum");
@@ -11,12 +12,13 @@ export default async function Detail(props) {
     // 하드코딩 할 수 없으니, props로 부모 컴포넌트가 보낸것 받아서 넣기
 
     let result = await db.collection('post').findOne({ _id: new ObjectId(props.params.id) });
-    console.log(props)
+    // console.log(props)
     // http://localhost:3000/detail/1 유저가 URL에 입력한 값 출력은
     // { params: { hello: '1' }, searchParams: { } }
     // http://localhost:3000/detail/aaa { params: { hello: 'aaa' }, searchParams: {} }
     // 유저가 detail/[id]/page.js에서 [id] 자리에 입력한 값을 출력 가능함
-    console.log(props.params.id)
+
+    // console.log(props.params.id)
     // 이렇게 props.params.id 하면은 id값이 들어감
     // 그러면 url에 id값 입력하면 해당 페이지를 보여주게 됨
     // http://localhost:3000/detail/64d9a316dce5a38bc6e45cc5
@@ -27,6 +29,8 @@ export default async function Detail(props) {
             <h1>Detail Page</h1>
             <h2>{result.title}</h2>
             <p>{result.content}</p>
+            {/* 댓글 컴포넌트(클라이언트 컴포넌트 댓글바로 반영되도록) */}
+            <Comment />
         </div>
     )
 }
