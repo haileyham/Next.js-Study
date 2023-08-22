@@ -41,6 +41,10 @@ export default function Comment({ _id }) {
 
             if (response.ok) {
                 // 성공적으로 처리된 경우에 대한 로직 추가
+                const newList = await response.json();
+                console.log(newList)
+                setData(newList);
+                // console.log(data)
             } else {
                 // 에러 처리 로직 추가
                 const errorResponseData = await response.json();
@@ -61,8 +65,11 @@ export default function Comment({ _id }) {
                         return (
                             // 반복문 쓸 때 key값 넣어주기
                             <div key={i}>
-                                <p>{a.content}</p>
-                                <p>{a.author}</p>
+                                <p>
+                                    <span>작성자 : {a.author_name} / </span>
+                                    댓글 : {a.content}
+                                    <button>삭제</button>
+                                </p>
                             </div>)
                     })
                     : '댓글 목록 로딩중'
