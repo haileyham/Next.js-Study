@@ -77,6 +77,7 @@ export default function Comment({ _id }) {
                                                 .then((response) => response.json())
                                                 .then((result) => {
                                                     console.log(result)
+                                                    // setLike(result)
                                                 }).catch((error) => {
                                                     console.error('Error like comment:', error);
                                                 })

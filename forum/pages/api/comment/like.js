@@ -14,5 +14,7 @@ export default async function handler(요청, 응답) {
     }
     const db = (await connectDB).db('forum');
     const result = await db.collection('like').insertOne(좋아요저장);
-    return 응답.status(200).json('좋아요완료')
+    const 좋아요갯수 = await db.collection('like').find({ likeComment: new ObjectId(요청.query.commentId) }).count(); // 좋아요 누른 해당 댓글의 id를 likeComment에 저장했기 때문에, likeComment 중에서 해당댓글id를 가지고 오고, count()로 갯수세기 / 이렇게 하면 누른갯수 가져올수 있음 
+    // console.log(좋아요갯수)
+    return 응답.status(200).json(좋아요갯수)//좋아요 갯수 보내주기
 }
