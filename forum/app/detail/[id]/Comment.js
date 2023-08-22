@@ -75,8 +75,11 @@ export default function Comment({ _id }) {
                                         })
                                             .then((response) => response.json())
                                             .then((result) => {
-                                                console.log(result); // '삭제완료' 메시지 출력
-                                                // 서버에서 삭제 작업이 완료되었다면, 적절한 업데이트 작업을 수행하거나 상태를 업데이트하세요.
+                                                if (result === '삭제완료') {
+                                                    setData(data.filter(comment => comment._id !== a._id)) // data(댓글목록)를 filter돌려서 댓글 삭제반영
+                                                } else {
+                                                    console.error('댓글 삭제 실패', result)
+                                                }
                                             })
                                             .catch((error) => {
                                                 console.error('Error deleting comment:', error);
