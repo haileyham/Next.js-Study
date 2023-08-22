@@ -44,6 +44,7 @@ export default function Comment({ _id }) {
                 const newList = await response.json();
                 console.log(newList)
                 setData(newList);
+                setComment('');
                 // console.log(data)
             } else {
                 // 에러 처리 로직 추가
@@ -76,7 +77,7 @@ export default function Comment({ _id }) {
             }
             {/* onChange는 <input>에 유저가 입력할 때마다 실행됨  */}
             {/* e.target.value는 유저가 input에 입력한 값이 남음 */}
-            <input onChange={(e) => setComment(e.target.value)} />
+            <input onChange={(e) => setComment(e.target.value)} value={comment} />
             {/* 서버로 댓글내용 전송 */}
             <button onClick={handleSubmit}>댓글전송</button>
         </div>
