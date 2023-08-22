@@ -5,7 +5,7 @@ export default async function Home() {
 
     const db = (await connectDB).db("forum");
     let result = await db.collection('post').find().toArray();
-    console.log(result);
+    // console.log(result);
 
     return (
         <div>
@@ -16,7 +16,7 @@ export default async function Home() {
 
 // ------------------------------------------------------------//
 
-// 처음 보는 세부기능 만들기 : 
+// 처음 보는 세부기능 만들기 :
 // 1. 어떤 식으로 동작하는지 상세하게 한글로 설명
 // 2. 코드로 짜기
 
@@ -35,7 +35,7 @@ export default async function Home() {
 
 // 1. 글 목록 보여줄 HTML 페이지 : App/list/page.js
 
-// 2. 페이지 방문할 때 DB에서 글 꺼내오기 
+// 2. 페이지 방문할 때 DB에서 글 꺼내오기
 // - 글 내용이 별로 없기 때문에 DB에다가 2번째 글 추가하고 오기(document)
 // ```
 // const db = (await connectDB).db("forum");
