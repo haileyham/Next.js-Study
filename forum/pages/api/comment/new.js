@@ -30,7 +30,7 @@ export default async function handler(요청, 응답) {
             let 저장내용 = {
                 content: 요청.body.comment, //댓글 내용
                 parent: new ObjectId(요청.body._id), //해당글id
-                author: session.user.email //댓글 작성자
+                author: session.user.email //댓글 작성자 / 나중에 회원 ObjectId 넣기
             }
             // console.log(요청.body)
             const db = (await connectDB).db("forum");
