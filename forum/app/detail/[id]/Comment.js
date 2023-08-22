@@ -7,6 +7,7 @@ export default function Comment({ _id }) {
     // console.log(comment);
     // console.log(_id);
     const [data, setData] = useState([])
+    const [like, setLike] = useState(0)
 
     useEffect(() => {
         fetch(`/api/comment/list?id=${_id}`) //서버에 GET요청하면서 데이터 보내기/query string방법/?이름=값 써서 보내기/id란 이름으로 props _id 값 보내고 있음
@@ -69,6 +70,19 @@ export default function Comment({ _id }) {
                                 <p>
                                     <span>작성자 : {a.author_name} / </span>
                                     댓글 : {a.content}
+                                    <span style={{ cursor: "pointer" }}
+                                        onClick={() => {
+                                            fetch(`/api/comment/like?commentId=${a._id}`,
+                                                { method: "POST" }) //아놔.... api앞에 /안붙여서 계속 오류났음 ㅠ
+                                                .then((response) => response.json())
+                                                .then((result) => {
+                                                    console.log(result)
+                                                }).catch((error) => {
+                                                    console.error('Error like comment:', error);
+                                                })
+                                        }}>
+                                        💜{like}개
+                                    </span>
                                     <button onClick={() => {
                                         fetch(`/api/comment/delete?id=${a._id}&author=${a.author}`, {//댓글 id를 서버로 보내줘야함/ &붙여서 데이터 추가 전송하기 / 댓글작성자 구분위해서 author 전송
                                             method: 'DELETE'
