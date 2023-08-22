@@ -17,9 +17,14 @@ export default async function handler(요청, 응답) {
             if (찾자.author === session.user.email) {//댓글 작성자랑 삭제요청유저 같으면 삭제하도록
                 let result = await db.collection('comment').deleteOne({ _id: new ObjectId(요청.query.id) })//댓글 id 받음
                 return 응답.status(200).json('삭제완료');
+            } if (session.user.role === "admin") {
+                let result = await db.collection('comment').deleteOne({ _id: new ObjectId(요청.query.id) })//댓글 id 받음
+                return 응답.status(200).json('삭제완료');
             } else {
                 return 응답.status(500).json('현재유저와 댓글 작성자 불일치')
             }
+        } else {
+            return 응답.status(401).json({ error: '로그인 필요' });
         }
     }
 }
