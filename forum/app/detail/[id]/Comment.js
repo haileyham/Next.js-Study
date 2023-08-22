@@ -56,6 +56,21 @@ export default function Comment({ _id }) {
         }
     };
 
+    // const handleDelete = () => {
+    //     fetch(`/api/comment/delete?id=${a.}`, {
+    //         method: 'DELETE'
+    //     })
+    //         .then((response) => response.json())
+    //         .then((result) => {
+    //             console.log(result); // '삭제완료' 메시지 출력
+    //             // 서버에서 삭제 작업이 완료되었다면, 적절한 업데이트 작업을 수행하거나 상태를 업데이트하세요.
+    //         })
+    //         .catch((error) => {
+    //             console.error('Error deleting comment:', error);
+    //             // 에러 처리 로직을 추가하십시오.
+    //         });
+    // };
+
     return (
         <div>
             {/* 수평줄 생성 hr */}
@@ -69,7 +84,20 @@ export default function Comment({ _id }) {
                                 <p>
                                     <span>작성자 : {a.author_name} / </span>
                                     댓글 : {a.content}
-                                    <button>삭제</button>
+                                    <button onClick={() => {
+                                        fetch(`/api/comment/delete?id=${a._id}`, {//댓글 id를 서버로 보내줘야함
+                                            method: 'DELETE'
+                                        })
+                                            .then((response) => response.json())
+                                            .then((result) => {
+                                                console.log(result); // '삭제완료' 메시지 출력
+                                                // 서버에서 삭제 작업이 완료되었다면, 적절한 업데이트 작업을 수행하거나 상태를 업데이트하세요.
+                                            })
+                                            .catch((error) => {
+                                                console.error('Error deleting comment:', error);
+                                                // 에러 처리 로직을 추가하십시오.
+                                            });
+                                    }}>삭제</button>
                                 </p>
                             </div>)
                     })
