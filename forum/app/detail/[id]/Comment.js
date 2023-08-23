@@ -8,6 +8,7 @@ export default function Comment({ _id }) {
     // console.log(_id);
     const [data, setData] = useState([])
     const [like, setLike] = useState(0)
+    const [loading, setLoading] = useState(true); //댓글 로딩중,댓글없음 처리하려고 추가
 
     useEffect(() => {
         fetch(`/api/comment/list?id=${_id}`) //서버에 GET요청하면서 데이터 보내기/query string방법/?이름=값 써서 보내기/id란 이름으로 props _id 값 보내고 있음
@@ -16,6 +17,7 @@ export default function Comment({ _id }) {
                 // console.log(result)
                 setData(result) //state에 담아주기 / 조금 늦게 처리되기때문에 밑에 console.log(data)에는 안찍힐 수 있음. 정상동작함
                 // console.log(data)
+                setLoading(false) //댓글 목록 로딩 완료
             })
     }, [])
     // useEffect
@@ -61,7 +63,8 @@ export default function Comment({ _id }) {
         <div>
             {/* 수평줄 생성 hr */}
             <hr></hr>
-            {
+            {loading ?
+                '댓글 목록 로딩중' :
                 data.length > 0 ? //댓글 목록 처음 뜰 때 시간 걸리기 때문에 로딩중으로 처리
                     data.map((a, i) => {
                         return (
@@ -104,7 +107,7 @@ export default function Comment({ _id }) {
                                 </p>
                             </div>)
                     })
-                    : '댓글 목록 로딩중'
+                    : '댓글 없음'
             }
             {/* onChange는 <input>에 유저가 입력할 때마다 실행됨  */}
             {/* e.target.value는 유저가 input에 입력한 값이 남음 */}
