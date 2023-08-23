@@ -1,6 +1,7 @@
 import { authOptions } from '@/pages/api/auth/[...nextauth]'
 import { getServerSession } from 'next-auth'
 import React from 'react'
+import PreImg from './PreImg'
 
 export default async function Write() {
     let session = await getServerSession(authOptions)
@@ -17,6 +18,7 @@ export default async function Write() {
                     {/* 서버/api/post/new로 보내짐 > 유저가 /api/post/new로 요청시 실행됨 */}
                     <input type="text" name="title" placeholder="글 제목" />
                     <input type="text" name="content" placeholder="글 내용" />
+                    <PreImg />
                     <button type="submit">등록</button>
                 </form>
             </div>
