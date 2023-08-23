@@ -1,0 +1,74 @@
+//------------------------------------------------------------//
+
+1. 로딩
+2. 에러
+3. 404
+
+//------------------------------------------------------------//
+
+# 1. 로딩중 UI 만들기
+1. loading.js
+2. export default 컴포넌트
+
+[동작과정]
+- detail/[id]/loading, page.js 이렇게 있으면
+- page.js 이거 로드되기 전까지 loading을 먼저 보여줌
+- React에서 Suspense 동작
+```
+<Suspense fallback={<div>로딩중</div>}  (← 밑의 div 로드되기 전에 먼저 보여줌)
+    <div>보여줄페이지</div>     (← 로드되기전에 위의 것 먼저 보여줌)
+</Suspense>
+```
+
+[특징]
+- client component 가능
+- 모든 page.js 옆에 loading.js 생성가능
+- (참고) 옆에 loading.js 없으면 상위폴더들 찾아서 출력 (App 놓으면 모든 파일 가능)
+
+
+//------------------------------------------------------------//
+
+# 2. 에러페이지
+(에러페이지 if문 사용 가능하지만)
+1. error.js 만들고
+2. export default client컴포넌트 ★ client component 필수
+
+[동작과정]
+- props로 error, reset 받음
+- detail/[id]/error, page.js 이렇게 있으면
+- page.js 에서 에러나면 error.js 보여줌
+- error : console 찍으면 어떤 error 발생했는지 보여줌
+- reset : 함수 / 페이지 다시로드 <button onClick={()=>{reset()}}>페이지 다시로드</button>
+
+[특징]
+- client component 필수
+- props로 error, reset 받음
+- 웹 페이지 전체가 아닌 page.js 해당 부분만 error.js로 바꿔줌
+- (참고) 옆에 error.js 없으면 상위폴더들 찾아서 출력 (App 놓으면 모든 파일 가능)
+- (참고) error.js는 옆에 있는 layout.js 에러 체크 못함
+- layout.js 에러처리 
+(1) 상위폴더에 두기
+(2) 상위폴더 없으면 global-error.js 만들면 최상위 layout.js도 에러 체크 가능
+
+//------------------------------------------------------------//
+
+# 3. 404페이지 (없는 url 접속)
+- Next.js 기본셋팅 되어 있음
+- detail 페이지 url 끝에 id 바꿨을 때 404가 아니라 에러먼저 뜨는 경우
+- DB에서 id를 찾아오는데 틀리게 입력했기 때문에 서버의 result가 비어있어서 error로 뜸
+- 이 경우 if문으로 처리 /(근데 난 error로 계속 뜸)
+```
+    if (result === null) {
+        return <div>없는페이지</div>
+    }
+```
+[not-found]
+1. not-found.js 생성
+2. 404 페이지 원할 때 notFound() 실행
+- page.js 대신 not-found.js 보여주는 함수
+``` /(근데 난 error로 계속 뜸)
+    if (result === null) {
+        return notFound()
+    }
+```
+- 상위폴더에 두면 모두 사용가능

@@ -2,6 +2,7 @@ import { connectDB } from '@/util/database';
 import { ObjectId } from 'mongodb';
 import React from 'react'
 import Comment from './Comment';
+import notFound from './not-found';
 
 export default async function Detail(props) {
     const db = (await connectDB).db("forum");
@@ -23,6 +24,10 @@ export default async function Detail(props) {
     // 그러면 url에 id값 입력하면 해당 페이지를 보여주게 됨
     // http://localhost:3000/detail/64d9a316dce5a38bc6e45cc5
     // 하지만 유저가 직접 복잡한 id값을 입력할 수는 없으니, list에서 목록 하나 누를때마다 해당 id값 link 혹은 a로 넘어가기
+
+    // if (result === null) {
+    //     return notFound()
+    // }
 
     return (
         <div>
