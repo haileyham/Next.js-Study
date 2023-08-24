@@ -69,4 +69,18 @@ cookies().get('name') //name한글말고 영어로 해둬야 잘 가져옴
 - 가장 유용한 점 : server component나 서버 api 에서 쉽게 읽을 수 있다는 것
 (쿠키는 GET, POST 등 요청시마다 서버로 전달되기 때문. 그래서 브라우저에 저장한 데이터를 DB 데이터처럼 html 렌더링 전에 바로 읽고 싶다면 cookie란에 보관해둬됨 그래서 서버사이드렌더링할 때 쿠키같은게 유용)
 - 단점 : 단순 문자열만 저장가능해서 너무 길고 복잡한 데이터는 보관하기 불편할 수 있고, 항상 GET, POST 요청마다 전달되니 쓸데없는 네트워크 호스팅 비용도 늘어나는게 단점. but 간단한 다크모드 정도는 부담 딱히 없음
+- 특정페이지 서버로 쿠키 전송안될경우 path=/추가 : document.cookie = 'mode=dark; max-age=' + (3600 * 24 * 400) + 'path=/' (원하는 /URL 접속시에만 해당 쿠키 전송)
  
+//------------------------------------------------------------//
+
+1. client component에서 cookie 만들라고 작성
+- 쿠키 없을 경우에만 쿠키 생성하도록 조건문 추가
+- 특정 쿠키 확인하는 코드 작성
+2. server component에서 import { cookies } from 'next/headers'로 cookies() 사용하여 쿠키값 출력 가능 cookies().get('mode') //모드라는 이름의 쿠키값 가져옴
+- 쿠키값에 따라서 class 부착
+3. css
+- 각 class명마다 background 조정
+4. 변경버튼 / 새로고침
+- state로 변경 가능한데, 이는 state 부분만 재렌더링
+- router.refresh() 사용하기 / 변경부분 새로고침됨
+- props로 쿠키불러온값 전송해서 사용하기

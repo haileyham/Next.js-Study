@@ -21,13 +21,13 @@ export default function DarkMode({ cookie }) {//쿠키값 받기
         //쿠키light,dark 확인에 따라서 dark,light로 변경 해주기
         if (쿠키값 == 'light') {//쿠키값 light면
             document.cookie = 'mode=dark; max-age=' + (3600 * 24 * 400)
-            router.refresh() //바뀐부분 새로고침
-            //import { useRouter } from "next/navigation" / 변수에담기
             setDarkmode('☀️')
+            router.refresh() //새로고침
+            //import { useRouter } from "next/navigation" / 변수에담기
         } else {//쿠키값 dark로 바꿔주기
             document.cookie = 'mode=light; max-age=' + (3600 * 24 * 400)
-            router.refresh()
             setDarkmode('🌙')
+            router.refresh()
         }
     }
 
