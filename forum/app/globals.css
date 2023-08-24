@@ -80,3 +80,16 @@ a{
     width:2rem;
     border-radius: 50%;
 }
+
+.dark-mode .navbar{
+    background: #222;
+}
+
+.dark-mode .navbar a{
+    color : white;
+}
+
+/* .dark-mode{
+    background: #222;
+    color : white;
+} */

@@ -21,12 +21,16 @@ export default async function RootLayout({ children }) {
     let session = await getServerSession(authOptions); //서버 컴포넌트, 서버기능 안에서 사용가능 / getServerSession(), authOptions 두개 import 하고 async,await 붙이기
     console.log(session); // server component이기때문에 터미널에서 확인 가능
 
-    // let res = cookies().get('hello')
-    // console.log(res)
+    let cookie = cookies().get('mode') //cookie에서 mode랑 값 가져오기
+    console.log(cookie)
 
     return (
         <html lang="en">
-            <body className={inter.className}>
+            <body className={
+                cookie != undefined && cookie.value == 'dark' //쿠키 이조건충족하면,
+                    ? 'dark-mode' //클래스 다크모드 붙임
+                    : ''//아니면 클래스 안붙임
+            }>
                 <div className="navbar">
                     <Link href="/" className="logo">HaileyForum</Link>
                     <Link href="/list">List</Link>
