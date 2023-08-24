@@ -1,0 +1,38 @@
+//------------------------------------------------------------//
+
+이미지 업로드
+
+//------------------------------------------------------------//
+
+# 1. 이미지 업로드
+- 저장 : 서버컴퓨터 하드디스크
+- Vercel에 호스팅중 or AWS에서 인스턴스 여러개 이용중이면 하드디스크 이용이 어려울 수 있음
+- 하드빌려주는 클라우드 서비스 (AWS S3)
+- 만들기
+- 버킷 하나의 하드디스크라 생각
+- 버킷 정책 수정
+
+[선택한 이미지 보여주기]
+1. createObjectURL
+2. 이미지 선택하는 순간 AWS S3 업로드하고 받아오고 url 따와서 보여주기
+- 유저브라우저 > 서버 > S3 아니고
+- 유저브라우저 > S3 (이미지 바로 업로드) : Presigned URL 방식
+- 서버 부담 없음, 대신 S3 부담일 수 있으니 createObjectURL 사용하면됨
+
+[createObjectURL]
+- useState 이용, client component에서 가능하기 때문에 컴포넌트 따로 빼기
+
+[Presigned URL]
+1. 
+- client component에서 onChange 통해서 fetch 사용, 서버로 GET 요청, 날릴때 filename함께 날리기
+2. 
+- 라이브러리 설치(npm install aws-sdk 해서 AWS 다룰 수 있는 라이브러리 설치)
+- 서버는 Presigned URL 발급해서 보내주기
+- createPresignedPost 함수 이용하면 PresignedURL을 발급
+- .env 파일에
+ACCESS_KEY=액세스키
+SECRET_KEY=액세스키시크릿
+BUCKET_NAME=버킷명
+3. 
+- S3 업로드
+- 
