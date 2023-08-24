@@ -1,0 +1,61 @@
+//------------------------------------------------------------//
+
+middleware
+
+//------------------------------------------------------------//
+
+- app폴더와 나란하게 위치하여 middleware.js 생성
+1. 유저가 GET, POST (or페이지접속)요청시
+2. middleware.js 여기 먼저 실행되고
+3. 그 다음 서버코드 실행
+
+[middleware 안에서 쓸 수 있는 자료]
+- console.log(request.nextUrl)  //유저가 요청중인 URL 출력해줌
+- console.log(request.cookies)  //유저가 보낸 쿠키 출력해줌 / Map 자료형 가져오려면 .get('이름')
+- console.log(request.headers)  //유저의 headers 정보 출력해줌 / Map 자료형 가져오려면 .get('이름')
+- console.log(request.headers.get('user-agent'))  //유저의 headers 정보 출력해줌 
+(유저 headers 정보에는)
+- 이전방문페이지
+- 사용중인 OS, 브라우저
+- 선호하는 언어
+- IP
+- 쿠키 등
+
+[middleware에서 마지막은 NextResponse 꼭 이거 있어야함 / 별일없으니 넘어가자]
+- NextResponse.next()  //통과
+- NextResponse.redirect()  //다른페이지 이동(주소창도 변경)
+- NextResponse.rewrite()  //다른페이지 이동(주소창은 냅둠 / 현재 url 유지)
+
+
+//------------------------------------------------------------//
+
+# 1. /list 페이지 접속기록 저장해보기
+- 누가 /list 페이지 접속시 시간과 유저정보를 DB에 저장(출력만 해보쟝)
+
+//------------------------------------------------------------//
+
+# 2. 미로그인 유저 /write 접속시 로그인 페이지로 이동
+- nextauth 쓰면 여기서 로그인정보 출력가능
+- (조건).env 파일 이용하고 있어야 가능
+- (조건) JWT 써야 여기서 유저정보 쉽게 출력 가능
+- await getToken()({req:request})
+
+>> 만일 session 쓸 경우 session 정보 들어있는 쿠키 출력해보고, DB에 있나 조회 비교 후에 통과시켜주는 식으로 코드 짜야함
+
+//------------------------------------------------------------//
+
+# 3. middleware 쿠키로 다크모드
+
+//쿠키
+//darkmode 이걸로 가능함
+request.cookies.get('쿠키이름')  //출력
+request.cookies.has('쿠키이름')  //존재확인
+request.cookies.delete('쿠키이름')  //삭제
+const response = NextResponse.next()
+response.cookies.set({
+    name: 'mode',
+    value: 'dark',
+    maxAge: 3600,
+    httpOnly: true //유저가 자바스크립트로 브라우저 쿠키조작하는것 방지(개발자도구에서 직접 변경하는것 막지 못함)
+})
+return response  //쿠키생성
