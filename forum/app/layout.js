@@ -39,7 +39,8 @@ export default async function RootLayout({ children }) {
                     {/* <LoginBtn /> */}
                     {/* 로그인 유저정보 있을 경우 유저이름&로그아웃버튼 / 유저정보 없을 경우 로그인버튼 */}
                     <span></span>
-                    <DarkMode />
+                    {/* cookie 값 보내주기 { name: 'mode', value: 'light' }로 나옴*/}
+                    <DarkMode cookie={cookie.value} />
                     {
                         session ? <span className="userLogin" >
                             <img src={session.user.image} alt={session.user.name} className="loginImg" />
