@@ -19,10 +19,10 @@ export default async function RootLayout({ children }) {
     // 로그인된 유저정보 출력
     // 현재 로그인된 유저이름, 이메일 등이 남음
     let session = await getServerSession(authOptions); //서버 컴포넌트, 서버기능 안에서 사용가능 / getServerSession(), authOptions 두개 import 하고 async,await 붙이기
-    console.log(session); // server component이기때문에 터미널에서 확인 가능
+    // console.log(session); // server component이기때문에 터미널에서 확인 가능
 
     let cookie = cookies().get('mode') //cookie에서 mode랑 값 가져오기
-    console.log(cookie)
+    // console.log(cookie)
 
     return (
         <html lang="en">
