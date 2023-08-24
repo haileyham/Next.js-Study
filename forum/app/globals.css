@@ -81,6 +81,7 @@ a{
     border-radius: 50%;
 }
 
+/* darkmode */
 .dark-mode .navbar{
     background: #222;
 }
@@ -89,7 +90,16 @@ a{
     color : white;
 }
 
-/* .dark-mode{
+.dark-mode .list-item, .dark-mode .list-bg{
+    color : white;
+    background: #323232;
+}
+
+.dark-mode .list-item a{
+    color : white;
+}
+
+.dark-mode{
     background: #222;
     color : white;
-} */
+}
