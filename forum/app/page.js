@@ -1,15 +1,34 @@
 import { connectDB } from '@/util/database';
 import React from 'react'
+import Link from 'next/link'
 
 export default async function Home() {
 
     const db = (await connectDB).db("forum");
     let result = await db.collection('post').find().toArray();
     // console.log(result);
+    const imageURL = '/finjake.jpg'
 
     return (
         <div>
-            안녕
+            <main>
+                <div className="image-container">
+                    <img src={imageURL} alt="finjake" className="bg" />
+                    <div className="overlay">
+                        <h1>Hello user</h1>
+                        <p>This is the best chance!</p>
+                        <Link href="/register">
+                            <button>Enjoy us!</button>
+                        </Link>
+                    </div>
+                </div>
+            </main>
+            <div class="explain-box">
+                <h4>blahblah</h4>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem ipsa fugit ratione blanditiis recusandae
+                    ut temporibus quam id, eum quod consectetur obcaecati aperiam? Suscipit aspernatur ducimus dolores voluptas at
+                    expedita!</p>
+            </div>
         </div>
     )
 }
