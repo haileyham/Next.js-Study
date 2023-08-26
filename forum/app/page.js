@@ -23,7 +23,7 @@ export default async function Home() {
                     </div>
                 </div>
             </main>
-            <div class="explain-box">
+            <div className="explain-box">
                 <h4>blahblah</h4>
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem ipsa fugit ratione blanditiis recusandae
                     ut temporibus quam id, eum quod consectetur obcaecati aperiam? Suscipit aspernatur ducimus dolores voluptas at
