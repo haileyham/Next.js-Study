@@ -150,3 +150,29 @@ a{
 .dark-mode .explain-box{
     color:black;
 }
+
+.registerBox{
+    max-width:20rem;
+    margin:auto;
+    margin-top:1rem;
+    text-align: center;
+    display:flex;
+    flex-direction: column;
+    color: rgb(169, 169, 250);
+    /* box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.1); */
+}
+
+.registerBox input{
+    border-radius: 5px;
+    border:1px solid gray;
+    transition: border 1s;
+}
+
+.registerBox input:focus{
+    outline:2px solid rgb(118, 118, 208); /* 포커스되었을 때 테두리 색상 변경 */
+}
+
+.registerBox button{
+    background-color: rgb(169, 169, 250);
+    color:#fff;
+}
