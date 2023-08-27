@@ -82,6 +82,14 @@ export default function ListItem({ result }) {
                                 //         }, 1000)
                                 //     })
                             }}> 삭제🗑</span>
+                            <span onClick={() => {
+                                fetch(`/api/comment/list?id=${result[i]._id}`)
+                                    .then((response) => {
+                                        return response.json()
+                                    }).then((result) => {
+                                        console.log(result.length)
+                                    })
+                            }}> 댓글🗨</span>
                             <p>{result[i].content}</p>
                         </div>
                     )
