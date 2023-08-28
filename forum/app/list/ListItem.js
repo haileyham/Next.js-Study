@@ -1,10 +1,26 @@
 'use client'
 
 import Link from 'next/link'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 export default function ListItem({ result }) {
+    const [commentCounts, setCommentCounts] = useState({}); // 댓글 갯수를 저장할 상태
 
+    //댓글갯수 0.3초정도 딜레이 발생 흠..계속 또 고민해봐야겠다
+    useEffect(() => {
+        // 각 아이템에 대한 댓글 갯수를 가져오는 비동기 작업을 수행
+        const fetchCommentCounts = async () => {
+            const counts = {};
+            for (const item of result) {
+                const response = await fetch(`/api/comment/list?id=${item._id}`);
+                const data = await response.json();
+                counts[item._id] = data.length;
+            }
+            setCommentCounts(counts);
+        };
+
+        fetchCommentCounts();
+    }, [result]);
 
     return (
         <div className='hello'>
@@ -82,14 +98,7 @@ export default function ListItem({ result }) {
                                 //         }, 1000)
                                 //     })
                             }}> 삭제🗑</span>
-                            <span onClick={() => {
-                                fetch(`/api/comment/list?id=${result[i]._id}`)
-                                    .then((response) => {
-                                        return response.json()
-                                    }).then((result) => {
-                                        console.log(result.length)
-                                    })
-                            }}> 댓글🗨</span>
+                            <span> 댓글🗨 {commentCounts[result[i]._id] || 0}</span>
                             <p>{result[i].content}</p>
                         </div>
                     )
