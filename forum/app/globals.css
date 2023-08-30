@@ -176,3 +176,35 @@ a{
     background-color: rgb(169, 169, 250);
     color:#fff;
 }
+
+/* write페이지 */
+.p-20 form{
+    max-width:20rem;
+    margin:auto;
+    margin-top:1rem;
+    text-align: center;
+    display:flex;
+    flex-direction: column;
+    /* color: rgb(169, 169, 250); */
+    /* box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.1); */
+}
+
+.p-20{
+    box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    padding: 3rem;
+}
+
+.p-20 textarea{
+    resize: none; /*크키조정못하도록*/
+    font-family: inherit;
+    border-radius: 5px;
+    margin-top:10px;
+    padding:10px;
+    /* height:10rem; */
+}
+
+/* 왜 위에꺼에 적용안되고 밑에거에만 적용이되지? */
+.p-20 .writeContent, .p-20 .writeTitle{
+    height:10rem;
+}

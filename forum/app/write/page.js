@@ -16,8 +16,8 @@ export default async function Write() {
                 <h1>글작성</h1>
                 <form action="/api/post/new" method="POST">
                     {/* 서버/api/post/new로 보내짐 > 유저가 /api/post/new로 요청시 실행됨 */}
-                    <input type="text" name="title" placeholder="글 제목" />
-                    <input type="text" name="content" placeholder="글 내용" />
+                    <textarea type="text" name="title" placeholder="글 제목" className="writeTitle" />
+                    <textarea type="text" name="content" placeholder="글 내용" className="writeContent" />
                     <PreImg />
                     <button type="submit">등록</button>
                 </form>
