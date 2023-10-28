@@ -7,6 +7,7 @@ a{
     color:rgb(26, 26, 26);
 }
 
+/* nav */
 .navbar {
     background: white;
     margin:0;
@@ -43,6 +44,28 @@ a{
     font-weight: bold;
   } 
 
+  /* nav menu hover */
+  .navMenu{
+    position: relative;
+  }
+
+  .navMenu::before{
+    content: '';
+    position:absolute;
+    bottom : -0.7rem;
+    left:50%;
+    width:0;
+    transform: translateX(-50%); /* 중앙 정렬 */
+    height:2px;
+    background: #323232;
+    transition: width 0.3s ease;
+  }
+
+  .navMenu:hover::before{
+    width:70%;
+  }
+
+/* list */
 .list-bg {
     background: rgb(249, 250, 255);
     padding: 10px;

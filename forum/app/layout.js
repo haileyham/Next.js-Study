@@ -33,8 +33,8 @@ export default async function RootLayout({ children }) {
       }>
         <div className="navbar">
           <Link href="/" className="logo">HaileyForum</Link>
-          <Link href="/list">List</Link>
-          <Link href="/write">Write</Link>
+          <Link href="/list" className='navMenu'>List</Link>
+          <Link href="/write" className='navMenu'>Write</Link>
           {/* button에 onClick 못하기 때문에 client component로 버튼 만들고 import해와서 쓰기 / 로그인 연결 라이브러리 함께있기때문에 signIn()하면됨 */}
           {/* <LoginBtn /> */}
           {/* 로그인 유저정보 있을 경우 유저이름&로그아웃버튼 / 유저정보 없을 경우 로그인버튼 */}
