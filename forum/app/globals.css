@@ -145,6 +145,7 @@ a{
     color : white;
 }
 
+/* main */
 .bg{
     width:100%;
     height: 40rem;
@@ -175,8 +176,12 @@ a{
     background-color: rgba(0,0,0,0.3);
 }
 
+.overlay button:hover{
+  background: rgb(131, 255, 226);
+}
+
 .explain-box{
-    position: absolute;
+  position: absolute;
     background: rgb(255, 255, 255);
     border-radius: 5px;
     padding:1rem;
@@ -186,12 +191,13 @@ a{
     top: 38rem;
     left: 50%; /* 왼쪽 위치를 가운데로 설정 */
     transform: translateX(-50%); /* 가로로 가운데로 이동 */
-}
-
-.dark-mode .explain-box{
+  }
+  
+  .dark-mode .explain-box{
     color:black;
-}
-
+  }
+  
+  /* 일반회원가입페이지 */
 .registerBox{
     max-width:20rem;
     margin:auto;
@@ -216,6 +222,10 @@ a{
 .registerBox button{
     background-color: rgb(169, 169, 250);
     color:#fff;
+}
+
+.registerBox button:hover{
+  background-color: rgb(136, 136, 252);
 }
 
 /* write페이지 */
