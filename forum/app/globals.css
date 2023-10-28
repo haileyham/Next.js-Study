@@ -21,6 +21,24 @@ a{
     text-decoration: none;
     color: black;
   }
+
+  .navbar a, .darkLogin {
+    flex-grow:1;
+    text-align: center;
+  }
+
+  .darkLogin button{
+    transform: translateX(2rem);
+  }
+
+  .darkLogin button:hover{
+    background: rgb(131, 255, 226);
+  }
+
+  .darkLogin span{
+    cursor: pointer;
+  }
+
   .logo {
     font-weight: bold;
   } 
