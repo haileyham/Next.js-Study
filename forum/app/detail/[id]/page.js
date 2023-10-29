@@ -34,7 +34,7 @@ export default async function Detail(props) {
       <h1>Detail Page</h1>
       <header className='detailTitle'>
         <h2>{result.title}</h2>
-        <p>{result.author}</p>
+        <p>작성자 : {result.author}</p>
       </header>
       <main className='detailContent'>
         <p>{result.content}</p>
