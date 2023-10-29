@@ -259,3 +259,15 @@ a{
 .p-20 .writeContent, .p-20 .writeTitle{
     height:10rem;
 }
+
+/* detail */
+.detailPage{
+  padding:2rem;
+}
+
+.detailTitle, .detailContent, .detailComment{
+  border: 1px solid rgb(169, 169, 250);
+  border-radius: 10px;
+  padding:1rem;
+  margin-top: 1rem;
+}
