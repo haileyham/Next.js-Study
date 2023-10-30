@@ -302,3 +302,29 @@ a{
 .commentContent{
   flex-grow: 3;
 }
+
+.commentDeleteBtn:hover{
+  background: rgb(169, 169, 250);
+}
+
+.commentWrite{
+  display: flex;
+  gap:1rem;
+  justify-content: space-between;
+  margin-top:1rem;
+}
+
+.commentWrite input{
+  border-radius: 10px;
+  border: 1px solid rgb(169, 169, 250);
+  flex-grow:1;
+  padding:1rem 2rem;
+}
+
+.commentWrite input:focus{
+  outline: 2px solid rgb(139, 139, 255);
+}
+
+.commentWrite button:hover{
+  background: rgb(169, 169, 250);
+}
