@@ -23,7 +23,11 @@ export default async function List() {
       <h1>forum</h1>
       <ListItem result={result} />
       <aside className='list-aside'>
-        <img src="/finjake.jpg" alt="quiz" />
+        <Link href="/">
+          <p>지금 바로 Quiz!</p>
+          <img src="/finjake.jpg" alt="quiz" />
+        </Link>
+
       </aside>
     </div>
   )
