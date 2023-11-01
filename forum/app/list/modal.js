@@ -11,6 +11,9 @@ export default function Modal() {
     setModal(!modal);
   }
 
+  const closeOnClick = (e) => {
+    e.stopPropagation(); // 이벤트 버블링 중지
+  }
 
   return (
     <>
@@ -18,8 +21,8 @@ export default function Modal() {
         <button onClick={openModal}>{modal ? "opend" : "click"}</button>
         {modal ?
           <div className="modal" onClick={openModal}>
-            <div className="modal-content">
-              <div className="close-btn">&times;</div>
+            <div className="modal-content" onClick={closeOnClick}>
+              <div className="close-btn" onClick={openModal}>&times;</div>
               <Link href="/">main 페이지 이동</Link>
             </div>
           </div>
