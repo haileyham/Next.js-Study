@@ -3,6 +3,7 @@ import Link from 'next/link';
 import React from 'react'
 import DetailLink from './DetailLink';
 import ListItem from './ListItem';
+import Modal from './modal'
 
 export const dynamic = 'force-dynamic'
 
@@ -20,6 +21,7 @@ export default async function List() {
 
   return (
     <div className="list-bg">
+      <Modal></Modal>
       <h1>forum</h1>
       <ListItem result={result} />
       <aside className='list-aside'>
@@ -27,7 +29,6 @@ export default async function List() {
           <p>지금 바로 Quiz!</p>
           <img src="/finjake.jpg" alt="quiz" />
         </Link>
-
       </aside>
     </div>
   )
