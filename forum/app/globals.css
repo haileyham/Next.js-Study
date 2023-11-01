@@ -56,12 +56,13 @@ a{
     left:50%;
     width:0;
     transform: translateX(-50%); /* 중앙 정렬 */
+    background: #484545;
     height:2px;
-    background: #323232;
     transition: width 0.3s ease;
   }
-
+  
   .navMenu:hover::before{
+    background: #ffadad;
     width:70%;
   }
 
@@ -129,6 +130,7 @@ a{
 
   .list-aside :hover img{
     width:200%;
+    background: rgba(0,0,0,0.3);
   }
 
 
