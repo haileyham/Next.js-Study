@@ -1,5 +1,6 @@
 'use client'
 
+import Link from 'next/link';
 import React, { useState } from 'react'
 
 export default function Modal() {
@@ -18,7 +19,8 @@ export default function Modal() {
         {modal ?
           <div className="modal" onClick={openModal}>
             <div className="modal-content">
-              <div className="close-btn">&times;</div>모달창
+              <div className="close-btn">&times;</div>
+              <Link href="/">main 페이지 이동</Link>
             </div>
           </div>
           : null}

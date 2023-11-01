@@ -153,6 +153,7 @@ a{
 }
 
 .modal-content{
+  display: flex;
   justify-content: center;
   align-items: center;
   position: fixed;
@@ -162,11 +163,12 @@ a{
   background-color: white;
 }
 
-.close-btn {
+.modal-content .close-btn {
   /* // X 버튼을 화면 정중앙으로 정렬 */
     position: absolute;
     /* // 중앙에서 위로 10px 이동 */
     top: 10px;
+    right:20px;    
     cursor: pointer;
   }
 
