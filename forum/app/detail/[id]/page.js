@@ -20,6 +20,11 @@ export default async function Detail(props) {
   // 유저가 detail/[id]/page.js에서 [id] 자리에 입력한 값을 출력 가능함
 
   // console.log(props.params.id)
+  // dynamic route에서 [id]여기에 들어가는 값을 출력 가능한 것
+  // http://localhost:3000/detail/64d9a316dce5a38bc6e45cc5 이렇게 되어있을때 [64d9a316dce5a38bc6e45cc5]이 부분이 [id]임
+  // 위에는 hello :'1'로 뜨는 이유는 처음에 그렇게 실험해봤기 때문
+  // 바로 밑에줄에 id:'id블라블라' 뜨는 이유는 detail 페이지 다음단계에서 Link로 /detail/id값넣기 로 url 이동했기 때문
+  // { params: { id: '64d9a316dce5a38bc6e45cc5' }, searchParams: {} } 이렇게 들어옴 props.params.id하면 각 id값 출력 가능
   // 이렇게 props.params.id 하면은 id값이 들어감
   // 그러면 url에 id값 입력하면 해당 페이지를 보여주게 됨
   // http://localhost:3000/detail/64d9a316dce5a38bc6e45cc5
