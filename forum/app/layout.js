@@ -44,7 +44,7 @@ export default async function RootLayout({ children }) {
             {
               session ? <span className="userLogin" >
                 <img src={session.user.image} alt={session.user.name} className="loginImg" />
-                {session.user.name}
+                <Link href="/profile">{session.user.name}</Link>
                 <LogoutBtn />
               </span>
                 : <LoginBtn />
